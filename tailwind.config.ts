@@ -67,9 +67,9 @@ module.exports = {
         "3xl": "1920px",
       },
       fontFamily: {
-		brand: ["Poppins", "sans-serif"],
-        regular: ["Alegreya", "serif"],
-        secondary: ["Geist Mono", "monospace"],
+        alegreya: ["Alegreya", "serif"],
+        brand: ["Poppins", "serif"],
+        secondary: ["Geist Mono", "serif"],
       },
     },
   },
