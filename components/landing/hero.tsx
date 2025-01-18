@@ -5,6 +5,7 @@ import ProductLogoGeometry from "@/components/app-ui/product-logo-geometry";
 import dynamic from "next/dynamic";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { motion } from "framer-motion";
+import DemoYoutubeModal from "../app-ui/demo-youtube-modal";
 
 const UnderLineLottie = dynamic(() => import("../app-ui/underline-lottie"), {
   ssr: false,
@@ -14,7 +15,6 @@ const HeroSection = () => {
   return (
     <motion.div className="w-full flex items-center min-h-[45em] justify-between relative">
       <div className="flex flex-col gap-4 items-start justify-center ,min-h-[5em] w-full">
-        
         {/* model name and tagline  */}
         <motion.div
           className="flex flex-col items-start relative min-h-48 w-full"
@@ -52,7 +52,8 @@ const HeroSection = () => {
             }}
           >
             <GoToConsoleButton />
-            <QuickDemoTriggerButton />
+            {/* <QuickDemoTriggerButton /> */}
+            <DemoYoutubeModal />
           </motion.div>
         </div>
       </div>
@@ -79,21 +80,8 @@ const GoToConsoleButton = () => {
         "tabs py-2 lg:px-8 md:px-8 font-secondary font-bold text-sm bg-[#D7700B] border border-white relative text-white group w-full md:w-auto lg:w-auto"
       }
     >
-      <div className="w-[164px]  h-9 border border-white absolute -bottom-1 group-hover:bg-white left-1 duration-200 ease-in-out z-[-1] hidden lg:block md:block"></div>
+      <div className="w-[165px]  h-9 border border-white absolute -bottom-1 group-hover:bg-white left-1 duration-200 ease-in-out z-[-1] hidden lg:block md:block"></div>
       Try for free
-    </button>
-  );
-};
-
-const QuickDemoTriggerButton = () => {
-  return (
-    <button
-      className={
-        "font-secondary font-bold text-sm relative text-white text-center group flex items-center justify-center gap-2 underline-offset-2 hover:gap-3 ease-in-out duration-200 border border-white lg:border-none md:border-none w-full md:w-auto lg:w-auto py-2 "
-      }
-    >
-      <p className="lg:underline md:underline">See a quick demo</p>
-      -&gt;
     </button>
   );
 };
