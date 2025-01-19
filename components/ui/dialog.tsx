@@ -25,7 +25,12 @@ const DialogOverlay = React.forwardRef<
       className
     )}
     {...props}
-  ></DialogPrimitive.Overlay>
+  >
+    <DialogPrimitive.Close className="absolute right-6 top-6  opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground z-50 cursor-pointer">
+      <MinimizeIcon className="h-5 w-5" />
+      <span className="sr-only">Close</span>
+    </DialogPrimitive.Close>
+  </DialogPrimitive.Overlay>
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
@@ -35,10 +40,6 @@ const DialogContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
-    <DialogPrimitive.Close className="absolute right-6 top-6  opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground z-50 cursor-pointer">
-      <MinimizeIcon className="h-5 w-5" />
-      <span className="sr-only">Close</span>
-    </DialogPrimitive.Close>
     <DialogPrimitive.Content
       ref={ref}
       className={cn(

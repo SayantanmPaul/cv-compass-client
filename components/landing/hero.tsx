@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { motion } from "framer-motion";
 import DemoYoutubeModal from "../app-ui/demo-youtube-modal";
+import Link from "next/link";
 
 const UnderLineLottie = dynamic(() => import("../app-ui/underline-lottie"), {
   ssr: false,
@@ -60,7 +61,7 @@ const HeroSection = () => {
 
       {/* spline animation */}
       <motion.div
-        className="lg:relative absolute top-0 left-0 lg:left-24 w-full h-full lg:max-w-[44em] overflow-hidden -z-50"
+        className="lg:relative absolute top-0 left-0 lg:left-24 min-w-96 w-full h-full lg:max-w-[44em] overflow-hidden -z-50"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -73,15 +74,16 @@ const HeroSection = () => {
 
 export default HeroSection;
 
-const GoToConsoleButton = () => {
+export const GoToConsoleButton = () => {
   return (
-    <button
+    <Link
+      href={"/console"}
       className={
-        "tabs py-2 lg:px-8 md:px-8 font-secondary font-bold text-sm bg-[#D7700B] border border-white relative text-white group w-full md:w-auto lg:w-auto"
+        "tabs py-2 lg:px-8 md:px-8 font-secondary font-bold text-sm bg-[#D7700B] border border-white relative text-white group w-full md:w-auto lg:w-auto text-center"
       }
     >
       <div className="w-[165px]  h-9 border border-white absolute -bottom-1 group-hover:bg-white left-1 duration-200 ease-in-out z-[-1] hidden lg:block md:block"></div>
       Try for free
-    </button>
+    </Link>
   );
 };

@@ -1,4 +1,6 @@
 import { ProductLogoWithName } from "@/components/app-ui/productLogoWithName";
+import { GoToConsoleButton } from "./hero";
+import ConfirmRedirect from "../app-ui/confirm-redirect-dialog";
 
 const HeaderComp = () => {
   const navOptionsClass =
@@ -9,12 +11,13 @@ const HeaderComp = () => {
       <span className="min-w-5 h-5">
         <ProductLogoWithName />
       </span>
-      <div className="lg:flex md:flex items-center gap-6 font-bold font-secondary text-sm hidden text-slate-50/80">
+      <div className="lg:flex md:flex items-center gap-6 font-bold font-secondary text-sm hidden text-slate-50/80 py-1">
         <span className={`${navOptionsClass}`}>Challanges</span>
         <span className={`${navOptionsClass}`}>Features</span>
         <span className={`${navOptionsClass}`}>Support</span>
-        <span className={`${navOptionsClass}`}>Github</span>
+        <ConfirmRedirect />
       </div>
+      <GoToConsoleButton />
     </div>
   );
 };
