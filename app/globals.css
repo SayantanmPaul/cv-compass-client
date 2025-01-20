@@ -8,6 +8,10 @@ html,
 body,
 :root {
   background-size: contain;
+  background-repeat: repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
   background-image: url('/bg-assets/noise-texture.svg');
 }
 
