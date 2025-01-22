@@ -29,6 +29,31 @@ const ResumeParserForm: React.FC = () => {
 
   const { mutate: GenerateFeadbackFn, isPending } = useGenerateFeadback();
 
+  const handleAPIError = (error: AxiosError | Error) => {
+    let message = "Something went wrong. Please try again later.";
+
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 429) {
+        message = error.response?.data?.error || "API rate limit reached.";
+      } else if (error.response) {
+        message =
+          error.response?.data?.error?.message ||
+          `Request failed with status ${error.response.status}`;
+      } else if (error.request) {
+        message = "No response received from the server.";
+      }
+    } else {
+      message = error.message || message;
+    }
+
+    setError("root", { message });
+    toast({
+      title: message,
+      variant: "destructive",
+      style: toastStyles,
+    });
+  };
+
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     try {
       GenerateFeadbackFn(
@@ -40,45 +65,8 @@ const ResumeParserForm: React.FC = () => {
           onSuccess: (data) => {
             console.log(data);
           },
-          onError: (error: Error | AxiosError) => {
-            if (error instanceof AxiosError) {
-              if (error.response?.status === 429) {
-                const message =
-                  error.response?.data?.error ||
-                  "API rate limit reached. Please try again later.";
-                setError("root", { message });
-                toast({
-                  title: message,
-                  variant: "destructive",
-                  style: toastStyles,
-                });
-                return;
-              }
-              if (error.response) {
-                const message =
-                  error.response?.data?.error?.message ||
-                  `Request failed with status code ${error.response.status}`;
-                setError("root", { message });
-                return;
-              } else if (error.request) {
-                const message = "No response received from the server";
-                setError("root", { message });
-                toast({
-                  title: message,
-                  variant: "destructive",
-                  style: toastStyles,
-                });
-                return;
-              }
-            }
-            const message =
-              error.message || "Something went wrong. Please try again later.";
-            setError("root", { message });
-            toast({
-              title: message,
-              variant: "destructive",
-              style: toastStyles,
-            });
+          onError: (error) => {
+            handleAPIError(error);
           },
         }
       );
@@ -88,37 +76,13 @@ const ResumeParserForm: React.FC = () => {
     }
   };
 
-  const handleErrors = () => {
-    if (errors.resume) {
-      toast({
-        title: errors.resume.message,
-        variant: "destructive",
-        style: toastStyles,
-      });
-    }
-    if (errors.jobDescription) {
-      toast({
-        title: errors.jobDescription.message,
-        variant: "destructive",
-        style: toastStyles,
-      });
-    }
-    if (errors.root) {
-      toast({
-        title: errors.root.message,
-        variant: "destructive",
-        style: toastStyles,
-      });
-    }
-  };
-
   return (
     <div className="w-full h-fit flex flex-col items-center lg:gap-5 gap-3 overflow-hidden">
       <h1 className="lg:text-4xl md:text-3xl text-xl font-semibold font-alegreya lg:text-center md:text-center lg:max-w-2xl max-w-lg">
         Please Fill the Form to get Your Resume Scored and Genertate Feedback
       </h1>
       <form
-        onSubmit={handleSubmit(onSubmit, handleErrors)}
+        onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col items-center gap-3"
       >
         <Controller
@@ -133,18 +97,29 @@ const ResumeParserForm: React.FC = () => {
             />
           )}
         />
-        <Textarea
-          placeholder="Eg. paste the job description from the job posting or enter a brief summary"
-          rows={15}
-          style={{ fontSize: "18px" }}
-          {...register("jobDescription", {
-            required: "Please provide the job description from the job posting",
-            minLength: { value: 100, message: "Job description is too short" },
-          })}
-          className={`border border-white/5 text-white font-alegreya rounded-none focus:border-white/20 placeholder:text-slate-100/30 ${
-            errors && errors.jobDescription ? "border-[#D7700B]" : ""
-          }`}
-        />
+        <div className="w-full flex flex-col gap-1">
+          <Textarea
+            placeholder="Eg. paste the job description from the job posting or enter a brief summary"
+            rows={15}
+            style={{ fontSize: "18px" }}
+            {...register("jobDescription", {
+              required:
+                "Please provide the job description from the job posting",
+              minLength: {
+                value: 100,
+                message: "Job description is too short",
+              },
+            })}
+            className={`border border-white/5 text-white font-alegreya rounded-none focus:border-white/20 placeholder:text-slate-100/30 ${
+              errors && errors.jobDescription ? "border-[#D7700B]" : ""
+            }`}
+          />
+          {errors.jobDescription && (
+            <span className="text-red-500 text-sm font-secondary w-full text-start">
+              {errors.jobDescription.message}
+            </span>
+          )}
+        </div>
         <button
           type="submit"
           disabled={isSubmitting}
