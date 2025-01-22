@@ -27,18 +27,21 @@ const secondaryVariant = {
 };
 
 export const FileUpload = ({
+  value,
   onChange,
+  error,
 }: {
-  onChange?: (file: File | null) => void;
+  value: File | null;
+  onChange: (file: File | null) => void;
+  error?: string;
 }) => {
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(value);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
   const { toast } = useToast();
 
   const handleFileChange = (newFile: File | null) => {
     setFile(newFile);
-    onChange?.(newFile);
+    onChange(newFile);
   };
 
   const handleClick = () => {
@@ -49,6 +52,7 @@ export const FileUpload = ({
     multiple: false,
     accept: { "application/pdf": [".pdf"] },
     noClick: true,
+    maxSize: 10 * 1024 * 1024, // 10MB
     onDrop: (acceptedFile) => {
       const file = acceptedFile[0];
       if (file && file.type === "application/pdf") {
@@ -61,13 +65,15 @@ export const FileUpload = ({
         });
       }
     },
-    onDropRejected: (error) => {
-      console.log("File rejected:", error);
-    },
   });
 
   return (
-    <div className="w-full" {...getRootProps()}>
+    <div
+      className={`w-full border border-white/10 border-dashed hover:border-white/20 ease-in-out ${
+        error ? "border-[#D7700B] hover:border-[#D7700B]" : ""
+      }`}
+      {...getRootProps()}
+    >
       <motion.div
         onClick={handleClick}
         whileHover="animate"
