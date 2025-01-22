@@ -1,11 +1,18 @@
+import { toast } from "@/hooks/use-toast";
+import { useGenerateFeadback } from "@/lib/react-query/queries";
+import { FormInput } from "@/lib/types";
+import { AxiosError } from "axios";
 import React from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FileUpload } from "../ui/file-upload";
 import { Textarea } from "../ui/textarea";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { toast } from "@/hooks/use-toast";
-import { FormInput } from "@/lib/types";
-import { useGenerateFeadback } from "@/lib/react-query/queries";
 
+const toastStyles = {
+  marginTop: "1rem",
+  padding: "10px 16px",
+  fontSize: "24px",
+  fontFamily: "alegreya",
+};
 const ResumeParserForm: React.FC = () => {
   const {
     register,
@@ -33,6 +40,46 @@ const ResumeParserForm: React.FC = () => {
           onSuccess: (data) => {
             console.log(data);
           },
+          onError: (error: Error | AxiosError) => {
+            if (error instanceof AxiosError) {
+              if (error.response?.status === 429) {
+                const message =
+                  error.response?.data?.error ||
+                  "API rate limit reached. Please try again later.";
+                setError("root", { message });
+                toast({
+                  title: message,
+                  variant: "destructive",
+                  style: toastStyles,
+                });
+                return;
+              }
+              if (error.response) {
+                const message =
+                  error.response?.data?.error?.message ||
+                  `Request failed with status code ${error.response.status}`;
+                setError("root", { message });
+                return;
+              } else if (error.request) {
+                const message = "No response received from the server";
+                setError("root", { message });
+                toast({
+                  title: message,
+                  variant: "destructive",
+                  style: toastStyles,
+                });
+                return;
+              }
+            }
+            const message =
+              error.message || "Something went wrong. Please try again later.";
+            setError("root", { message });
+            toast({
+              title: message,
+              variant: "destructive",
+              style: toastStyles,
+            });
+          },
         }
       );
     } catch (error) {
@@ -46,39 +93,21 @@ const ResumeParserForm: React.FC = () => {
       toast({
         title: errors.resume.message,
         variant: "destructive",
-        style: {
-          marginTop: "1rem",
-          padding: "10px 16px",
-          // backgroundColor: "#D7700B",
-          fontSize: "24px",
-          fontFamily: "alegreya",
-        },
+        style: toastStyles,
       });
     }
     if (errors.jobDescription) {
       toast({
         title: errors.jobDescription.message,
         variant: "destructive",
-        style: {
-          marginTop: "1rem",
-          padding: "10px 16px",
-          // backgroundColor: "#D7700B",
-          fontSize: "24px",
-          fontFamily: "alegreya",
-        },
+        style: toastStyles,
       });
     }
     if (errors.root) {
       toast({
         title: errors.root.message,
         variant: "destructive",
-        style: {
-          marginTop: "1rem",
-          padding: "10px 16px",
-          // backgroundColor: "#D7700B",
-          fontSize: "24px",
-          fontFamily: "alegreya",
-        },
+        style: toastStyles,
       });
     }
   };
@@ -110,6 +139,7 @@ const ResumeParserForm: React.FC = () => {
           style={{ fontSize: "18px" }}
           {...register("jobDescription", {
             required: "Please provide the job description from the job posting",
+            minLength: { value: 100, message: "Job description is too short" },
           })}
           className={`border border-white/5 text-white font-alegreya rounded-none focus:border-white/20 placeholder:text-slate-100/30 ${
             errors && errors.jobDescription ? "border-[#D7700B]" : ""
