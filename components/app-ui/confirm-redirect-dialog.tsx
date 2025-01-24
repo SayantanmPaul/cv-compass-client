@@ -27,7 +27,13 @@ const ConfirmRedirect = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <span className={`${navOptionsClass}`}>Github</span>
+        <span
+          role="link"
+          aria-label="Go to GitHub"
+          className={`${navOptionsClass}`}
+        >
+          Github
+        </span>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] p-5 bg-[#1B2529]/40 backdrop-blur-lg border-[#1B2529]">
         <DialogHeader>

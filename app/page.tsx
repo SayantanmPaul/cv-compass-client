@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div vaul-drawer-wrapper="" className="bg-background">
+    <div vaul-drawer-wrapper="">
       <motion.div
         className="w-full h-screen lg:px-16 px-4 py-7 bg-no-repeat lg:bg-contain bg-cover max-w-screen-2xl"
         initial={{ opacity: 0 }}

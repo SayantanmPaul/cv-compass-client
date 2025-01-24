@@ -1,5 +1,4 @@
 import { ProductLogoWithName } from "@/components/app-ui/productLogoWithName";
-import { GoToConsoleButton } from "./hero";
 import ConfirmRedirect from "../app-ui/confirm-redirect-dialog";
 
 const HeaderComp = () => {
@@ -17,7 +16,6 @@ const HeaderComp = () => {
         <span className={`${navOptionsClass}`}>Support</span>
         <ConfirmRedirect />
       </div>
-      <GoToConsoleButton />
     </div>
   );
 };

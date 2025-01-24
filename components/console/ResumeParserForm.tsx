@@ -115,7 +115,7 @@ const ResumeParserForm: React.FC = () => {
             }`}
           />
           {errors.jobDescription && (
-            <span className="text-red-500 text-sm font-secondary w-full text-start">
+            <span className="text-red-500 lg:text-sm text-xs font-secondary w-full text-start">
               {errors.jobDescription.message}
             </span>
           )}

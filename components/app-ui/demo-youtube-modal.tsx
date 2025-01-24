@@ -2,7 +2,7 @@ import {
   Credenza,
   CredenzaBody,
   CredenzaContent,
-  CredenzaTrigger
+  CredenzaTrigger,
 } from "@/components/ui/credenza";
 
 import { useState } from "react";

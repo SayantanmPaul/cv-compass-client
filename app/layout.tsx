@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` antialiased flex flex-col items-center h-[100vh]`}>
+      <body className={`antialiased flex flex-col items-center h-[100vh]`}>
         <QueryProvider>
           <ThemeProvider
             attribute="class"
