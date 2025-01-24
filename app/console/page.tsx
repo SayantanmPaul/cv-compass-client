@@ -1,5 +1,6 @@
 "use client";
 
+import CandidateEvaluationSection from "@/components/console/candidate-evaulation";
 import ConsoleNavbar from "@/components/console/console-nav";
 import ResumeParserForm from "@/components/console/ResumeParserForm";
 import { motion } from "framer-motion";
@@ -14,9 +15,12 @@ const ConsolePage = () => {
     >
       {/* Navbar */}
       <ConsoleNavbar />
-      <div className="w-full flex flex-col justify-start items-center">
+      <div className="w-full flex flex-col justify-start items-center gap-10">
         <div className="max-w-screen-lg w-full">
           <ResumeParserForm />
+        </div>
+        <div className="max-w-screen-lg w-full">
+          <CandidateEvaluationSection />
         </div>
       </div>
     </motion.div>
