@@ -1,47 +1,72 @@
-import React from "react";
-import FilterCheckBoxInput from "./filter-checkbox";
-import ATSBreakDownRaderChart from "../charts/AtsBreakdownRaderChart";
-import AtsBreakdownBarChart from "../charts/AtsBreakdownBarChart";
+import { useAppStore } from "@/context/AppStore";
 import feedback from "../../testresult.json";
+import AtsBreakdownBarChart from "../charts/AtsBreakdownBarChart";
+import ATSBreakDownRaderChart from "../charts/AtsBreakdownRaderChart";
 import AtsProgrssCard from "../charts/AtsProgrssCard";
-import { Badge } from "../ui/badge";
 import {
   CandidateFeedbacksSkeleton,
   CandidateSummarySkeleton,
   KeywordsBadgeSkeleton,
 } from "../skeletons/Skeletons";
+import { Badge } from "../ui/badge";
+import FilterCheckBoxInput from "./filter-checkbox";
 
 const CandidateEvaluationSection = () => {
+  const { userType } = useAppStore();
+
   const basePadding = "lg:px-2 md:px-2 px-1";
 
-  return (
-    <div className="w-full flex flex-col lg:gap-10 gap-6">
-      <div className="w-full flex items-end justify-end">
-        <FilterCheckBoxInput />
+  const RecruterViewJSX = () => {
+    return (
+      <div className="w-full flex lg:flex-row md:flex-row flex-col-reverse justify-between gap-4">
+        <div className="w-full flex flex-col gap-4">
+          <ATSBreakDownRaderChart />
+          <div className={` py-3 ${basePadding}`}>
+            <CandidateSummary />
+          </div>
+          <div className={`pb-3 ${basePadding}`}>
+            <MissingKeywordsBadgesSection
+              badges={feedback.feedback.missingKeywords}
+            />
+          </div>
+        </div>
+        <div className="w-full flex flex-col gap-4">
+          <div className="w-full relative">
+            <AtsProgrssCard progress={67} />
+          </div>
+          <div className={`w-full pb-3 lg:p-3 ${basePadding}`}>
+            <RelevantKeywordsBadgesSection
+              badges={feedback.feedback.relavantKeywords}
+            />
+          </div>
+          <AtsBreakdownBarChart />
+        </div>
       </div>
-      <div className=" w-full flex flex-col gap-4 justify-between">
-        <div className="w-full flex lg:flex-row md:flex-row flex-col justify-between gap-4">
+    );
+  };
+
+  const CandidateViewJSX = () => {
+    return (
+      <>
+        <div className="w-full flex lg:flex-row md:flex-row flex-col-reverse justify-between gap-4">
           <div className="w-full flex flex-col gap-4">
-            <ATSBreakDownRaderChart />
-            <div className={` py-3 ${basePadding}`}>
-              <CandiddateSummary />
+            <div className={`${basePadding}`}>
+              <CandidateSummary />
             </div>
-            <div className={`pb-3 ${basePadding}`}>
+            <div className={` ${basePadding}`}>
               <MissingKeywordsBadgesSection
                 badges={feedback.feedback.missingKeywords}
               />
             </div>
+            <div className={` py-3 ${basePadding}`}>
+              <RelevantKeywordsBadgesSection
+                badges={feedback.feedback.relavantKeywords}
+              />
+            </div>
           </div>
           <div className="w-full flex flex-col gap-4">
-            <div className="w-full flex flex-col gap-4">
-              <div className="w-full relative">
-                <AtsProgrssCard progress={67} />
-              </div>
-              <div className={`w-full pb-3 lg:p-3 ${basePadding}`}>
-                <RelevantKeywordsBadgesSection
-                  badges={feedback.feedback.relavantKeywords}
-                />
-              </div>
+            <div className="w-full relative">
+              <AtsProgrssCard progress={67} />
             </div>
             <AtsBreakdownBarChart />
           </div>
@@ -51,6 +76,17 @@ const CandidateEvaluationSection = () => {
             feedbacks={feedback.feedback.feedback}
           />
         </div>
+      </>
+    );
+  };
+
+  return (
+    <div className="w-full flex flex-col lg:gap-10 gap-6">
+      <div className="w-full flex items-end justify-end">
+        <FilterCheckBoxInput />
+      </div>
+      <div className=" w-full flex flex-col justify-between">
+        {userType.recruiter ? <RecruterViewJSX /> : <CandidateViewJSX />}
       </div>
     </div>
   );
@@ -58,14 +94,14 @@ const CandidateEvaluationSection = () => {
 
 export default CandidateEvaluationSection;
 
-const CandiddateSummary = () => {
+const CandidateSummary = () => {
   if (!feedback.feedback.summary) {
     return <CandidateSummarySkeleton />;
   }
   return (
     <div className="w-full flex flex-col gap-3">
       <h1 className="text-3xl font-alegreya font-semibold ">Summary</h1>
-      <p className="text-lg text-accent font-medium font-alegreya ">
+      <p className="text-lg text-accent font-medium font-alegreya text-pretty ">
         {feedback.feedback.summary}
       </p>
     </div>
