@@ -24,6 +24,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { Skeleton } from "../ui/skeleton";
 
 const atsData = {
   atsScore: 48,
@@ -67,7 +68,11 @@ if (atsData.atsScore >= 70) {
   footerMessage = "Low Match: Candidate may not be a strong fit for this role.";
   trendingIcon = <TrendingUp className="h-4 w-4 text-red-500" />;
 }
+
 const AtsBreakdownBarChart = () => {
+  if (!atsData) {
+    return <BarChartSkeleton />;
+  }
   return (
     <Card>
       <CardHeader>
@@ -129,3 +134,31 @@ const AtsBreakdownBarChart = () => {
 };
 
 export default AtsBreakdownBarChart;
+
+const BarChartSkeleton = () => {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="font-alegreya">
+          <Skeleton className="h-6 w-36" />
+        </CardTitle>
+        <CardDescription className="font-secondary text-xs">
+          <Skeleton className="h-4 w-56" />
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="lg:h-60 h-44 w-full flex flex-col gap-2 pt-4 px-1">
+          <Skeleton className="h-full w-2/3 rounded-md" />
+          <Skeleton className="h-full w-1/3 rounded-md" />
+          <Skeleton className="h-full w-1/2 rounded-md" />
+          <Skeleton className="h-full w-1/5 rounded-md" />
+        </div>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 pt-4 pb-7 text-sm">
+        <div className="font-medium leading-none font-alegreya inline-flex items-center gap-1 lg:text-sm md:text-sm text-xs">
+          <Skeleton className="h-4 w-80" />
+        </div>
+      </CardFooter>
+    </Card>
+  );
+};

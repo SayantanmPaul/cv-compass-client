@@ -17,6 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { Skeleton } from "../ui/skeleton";
 
 const atsData = {
   atsScore: 67,
@@ -49,6 +50,10 @@ const ATSBreakDownRaderChart = () => {
   );
   const percentageIncrease =
     ((atsData.atsScore - totalScore) / totalScore) * 100;
+
+  if (!atsData) {
+    return <RaderCardSkeleton />;
+  }
 
   return (
     <Card>
@@ -100,3 +105,31 @@ const ATSBreakDownRaderChart = () => {
 };
 
 export default ATSBreakDownRaderChart;
+
+const RaderCardSkeleton = () => {
+  return (
+    <Card>
+      <CardHeader className="items-center pb-4">
+        <CardTitle className="font-alegreya">
+          <Skeleton className="h-6 w-48" />
+        </CardTitle>
+        <CardDescription className="font-secondary text-muted-foreground text-xs">
+          <Skeleton className="h-4 w-64" />
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pb-3">
+        <div className="max-w-full mx-auto max-h-72 flex items-center justify-center">
+          <Skeleton className="w-64 h-60 rounded-full bg-transparent" />
+        </div>
+      </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 font-medium leading-none">
+          <Skeleton className="h-4 w-56" />
+        </div>
+        <div className="flex items-center gap-2 leading-none text-muted-foreground">
+          <Skeleton className="h-4 w-40" />
+        </div>
+      </CardFooter>
+    </Card>
+  );
+};

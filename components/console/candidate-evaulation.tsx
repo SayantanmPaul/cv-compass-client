@@ -5,6 +5,11 @@ import AtsBreakdownBarChart from "../charts/AtsBreakdownBarChart";
 import feedback from "../../testresult.json";
 import AtsProgrssCard from "../charts/AtsProgrssCard";
 import { Badge } from "../ui/badge";
+import {
+  CandidateFeedbacksSkeleton,
+  CandidateSummarySkeleton,
+  KeywordsBadgeSkeleton,
+} from "../skeletons/Skeletons";
 
 const CandidateEvaluationSection = () => {
   const basePadding = "lg:px-2 md:px-2 px-1";
@@ -54,6 +59,9 @@ const CandidateEvaluationSection = () => {
 export default CandidateEvaluationSection;
 
 const CandiddateSummary = () => {
+  if (!feedback.feedback.summary) {
+    return <CandidateSummarySkeleton />;
+  }
   return (
     <div className="w-full flex flex-col gap-3">
       <h1 className="text-3xl font-alegreya font-semibold ">Summary</h1>
@@ -65,6 +73,9 @@ const CandiddateSummary = () => {
 };
 
 const RelevantKeywordsBadgesSection = ({ badges }: { badges: string[] }) => {
+  if (!badges) {
+    return <KeywordsBadgeSkeleton />;
+  }
   return (
     <div className="flex flex-col gap-4 w-full">
       <h1 className="text-3xl font-alegreya font-semibold leading-0">
@@ -87,6 +98,9 @@ const RelevantKeywordsBadgesSection = ({ badges }: { badges: string[] }) => {
 };
 
 const MissingKeywordsBadgesSection = ({ badges }: { badges: string[] }) => {
+  if (!badges) {
+    return <KeywordsBadgeSkeleton />;
+  }
   return (
     <div className="flex flex-col gap-4 w-full">
       <h1 className="text-3xl font-alegreya font-semibold">
@@ -113,6 +127,9 @@ const CandidateEvaludationFeedback = ({
 }: {
   feedbacks: string[];
 }) => {
+  if (!feedback) {
+    return <CandidateFeedbacksSkeleton />;
+  }
   return (
     <div className="w-full flex flex-col gap-4 max-w-screen-xl items-end">
       <h1 className="text-3xl text-start w-full font-alegreya font-semibold ">
