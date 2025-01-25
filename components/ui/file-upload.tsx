@@ -70,7 +70,7 @@ export const FileUpload = ({
   return (
     <div
       className={`w-full border border-white/10 border-dashed hover:border-white/20 ease-in-out ${
-        error ? "border-[#D7700B] hover:border-[#D7700B]" : ""
+        error ? "border-primary hover:border-primary" : ""
       }`}
       {...getRootProps()}
     >
@@ -177,7 +177,7 @@ export const FileUpload = ({
             {!file && (
               <motion.div
                 variants={secondaryVariant}
-                className="absolute opacity-0 border border-dashed border-[#D7700B] inset-0 z-30 bg-transparent flex items-center justify-center h-24 mt-4 w-full max-w-[6rem] mx-auto rounded-md"
+                className="absolute opacity-0 border border-dashed border-primary inset-0 z-30 bg-transparent flex items-center justify-center h-24 mt-4 w-full max-w-[6rem] mx-auto rounded-md"
               ></motion.div>
             )}
           </div>

@@ -21,9 +21,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="cyberpunk-checkbox appearance-none lg:w-5 lg:h-5 md:w-5 md:h-5 w-4 h-4 border-2 border-[#D7700B] rounded-none bg-transparent relative cursor-pointer peer"
+        className="cyberpunk-checkbox appearance-none lg:w-5 lg:h-5 md:w-5 md:h-5 w-4 h-4 border-2 border-primary rounded-none bg-transparent relative cursor-pointer peer"
       />
-      <span className="peer-checked:text-[#D7700B] duration-200 ease-in-out">
+      <span className="peer-checked:text-primary duration-200 ease-in-out">
         {label}
       </span>
     </label>

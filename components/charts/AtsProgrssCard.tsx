@@ -1,13 +1,12 @@
-import React from "react";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { cn } from "@/lib/utils";
-import { InfoIcon } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { InfoIcon } from "lucide-react";
+import { Card, CardContent } from "../ui/card";
 
 interface ProgressBarProps {
   progress: number;
@@ -35,7 +34,7 @@ const AtsProgrssCard = ({ progress }: ProgressBarProps) => {
                   key={index}
                   className={cn(
                     "h-8 flex-1 rounded transition-colors",
-                    isProgrssDots(index) ? "bg-[#D7700B]" : "bg-muted"
+                    isProgrssDots(index) ? "bg-primary" : "bg-[#3C3D37]"
                   )}
                 />
               ))}

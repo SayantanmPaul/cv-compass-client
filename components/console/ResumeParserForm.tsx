@@ -111,7 +111,7 @@ const ResumeParserForm: React.FC = () => {
               },
             })}
             className={`border border-white/5 text-white font-alegreya rounded-none focus:border-white/20 placeholder:text-slate-100/30 ${
-              errors && errors.jobDescription ? "border-[#D7700B]" : ""
+              errors && errors.jobDescription ? "border-primary" : ""
             }`}
           />
           {errors.jobDescription && (
@@ -123,7 +123,7 @@ const ResumeParserForm: React.FC = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`tabs py-2 lg:px-8 md:px-8 font-secondary font-semibold text-sm bg-[#D7700B] border border-[#D7700B] hover:border-white/40 relative text-white group w-full text-center `}
+          className={`tabs py-2 lg:px-8 md:px-8 font-secondary font-semibold text-sm bg-primary border border-primary hover:border-white/40 relative text-white group w-full text-center `}
         >
           {isPending ? "Loading..." : "Generate Feedback"}
         </button>

@@ -23,7 +23,7 @@ const DemoYoutubeModal = () => {
           -&gt;
         </button>
       </CredenzaTrigger>
-      <CredenzaContent className="w-full lg:max-w-6xl max-w-2xl lg:h-auto md:h-auto h-72 lg:border md:border lg:border-[#D7700B] md:border-[#D7700B] bg-[#1B2529] overflow-hidden">
+      <CredenzaContent className="w-full lg:max-w-6xl max-w-2xl lg:h-auto md:h-auto h-72 lg:border md:border lg:border-primary md:border-primary bg-[#1B2529] overflow-hidden">
         <CredenzaBody className="flex items-center justify-center w-full">
           <div className="w-full h-full aspect-video relative">
             {isLoading && (

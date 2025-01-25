@@ -79,7 +79,7 @@ export const GoToConsoleButton = () => {
     <Link href={"/console"} className="relative w-full md:w-auto lg:w-auto">
       <span
         className={
-          "tabs py-2 px-4 lg:px-8 md:px-8 font-secondary font-bold text-sm bg-[#D7700B] border border-white text-white peer text-center overflow-hidden z-10 relative block w-full"
+          "tabs py-2 px-4 lg:px-8 md:px-8 font-secondary font-bold text-sm bg-primary border border-white text-white peer text-center overflow-hidden z-10 relative block w-full"
         }
       >
         Try for free

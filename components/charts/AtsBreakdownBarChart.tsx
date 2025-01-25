@@ -73,7 +73,7 @@ const AtsBreakdownBarChart = () => {
       <CardHeader>
         <CardTitle className="font-alegreya">Strength Chart</CardTitle>
         <CardDescription className="font-secondary text-xs">
-          Breakdown of the candidate's strengths
+          Breakdown of the candidate&apos;s strengths
         </CardDescription>
       </CardHeader>
       <CardContent>

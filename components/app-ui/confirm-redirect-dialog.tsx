@@ -51,7 +51,7 @@ const ConfirmRedirect = () => {
             Cancel
           </button>
           <button
-            className="tabs py-1 px-6 font-secondary font-semibold text-sm bg-[#D7700B] hover:bg-[#ae671f]  relative text-white group text-center"
+            className="tabs py-1 px-6 font-secondary font-semibold text-sm bg-primary hover:bg-[#ae671f]  relative text-white group text-center"
             onClick={handleConfirm}
           >
             Confirm
