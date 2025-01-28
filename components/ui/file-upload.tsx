@@ -77,7 +77,7 @@ export const FileUpload = ({
       <motion.div
         onClick={handleClick}
         whileHover="animate"
-        className="lg:p-10 p-5 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden"
+        className="lg:p-10 p-5 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden "
       >
         <input
           ref={fileInputRef}
@@ -97,7 +97,7 @@ export const FileUpload = ({
           <p className="relative z-20 font-brand font-normal text-neutral-400 dark:text-neutral-400 lg:text-sm text-xs mt-2 text-center">
             Drag or drop your resume here or click to upload (.pdf)
           </p>
-          <div className="relative w-full mt-8 max-w-xl mx-auto">
+          <div className="relative w-full mt-8 max-w-xl mx-auto min-h-28 h-full">
             {file ? (
               <motion.div
                 layoutId="file-upload"

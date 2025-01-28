@@ -30,11 +30,13 @@ import { AtsBreakDownType } from "@/lib/types";
 const AtsBreakdownBarChart = ({
   atsBreakDownData,
   atsScore,
+  isLoading,
 }: {
   atsBreakDownData?: AtsBreakDownType;
   atsScore?: number;
+  isLoading?: boolean;
 }) => {
-  if (!atsBreakDownData || !atsScore) {
+  if (isLoading || !atsBreakDownData || !atsScore) {
     return <BarChartSkeleton />;
   }
 

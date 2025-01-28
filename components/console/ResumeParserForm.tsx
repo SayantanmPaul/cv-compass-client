@@ -35,6 +35,8 @@ const ResumeParserForm: React.FC = () => {
     lastGeneratedFeedback,
     setListResults,
     listResults,
+    isLoading,
+    setIsLoading,
   } = useAppStore();
 
   const [resumeURL, setResumeURL] = useState<string | null>("");
@@ -75,6 +77,7 @@ const ResumeParserForm: React.FC = () => {
     });
   };
 
+  // creating a temporary url for session only
   const handleFileChange = (file: File | null) => {
     if (file) {
       setResumeFileName(file.name);
@@ -82,9 +85,11 @@ const ResumeParserForm: React.FC = () => {
       setResumeURL(url);
     }
   };
+
   // submit handler fn
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     try {
+      setIsLoading(true);
       GenerateFeadbackFn(
         {
           resume: data.resume,
@@ -141,11 +146,15 @@ const ResumeParserForm: React.FC = () => {
           onError: (error) => {
             handleAPIError(error);
           },
+          onSettled: () => {
+            setIsLoading(false);
+          },
         }
       );
     } catch (error) {
       console.log(error);
       setError("root", {});
+      setIsLoading(false);
     }
   };
 
@@ -198,10 +207,12 @@ const ResumeParserForm: React.FC = () => {
         </div>
         <button
           type="submit"
-          disabled={isSubmitting}
-          className={`tabs py-2 lg:px-8 md:px-8 font-secondary font-semibold text-sm bg-primary border border-primary hover:border-white/40 relative text-white group w-full text-center `}
+          disabled={isSubmitting || isLoading}
+          className={` py-2 lg:px-8 md:px-8 font-secondary font-semibold text-sm bg-primary border border-primary hover:border-white/40 relative text-white group w-full text-center ${
+            isLoading || isPending ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
-          {isPending ? "Loading..." : "Generate Feedback"}
+          {isLoading ? "..." : "Generate Feedback"}
         </button>
       </form>
     </div>

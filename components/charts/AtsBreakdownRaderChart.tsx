@@ -21,9 +21,11 @@ import { Skeleton } from "../ui/skeleton";
 const ATSBreakDownRaderChart = ({
   atsBreakDownData,
   atsScore,
+  isLoading,
 }: {
   atsBreakDownData?: AtsBreakDownType;
   atsScore?: number;
+  isLoading?: boolean;
 }) => {
   // const totalScore = Object.values(atsData.atsBreakDown).reduce(
   //   (sum, value) => sum + value,
@@ -32,7 +34,7 @@ const ATSBreakDownRaderChart = ({
   // const percentageIncrease =
   //   ((atsData.atsScore - totalScore) / totalScore) * 100;
 
-  if (!atsBreakDownData || !atsScore) {
+  if (isLoading || !atsBreakDownData || !atsScore) {
     return <RaderCardSkeleton />;
   }
 

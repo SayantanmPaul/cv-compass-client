@@ -2,9 +2,10 @@ import { useAppStore } from "@/context/AppStore";
 import { useCallback, useEffect } from "react";
 import DynamicTooltip from "../app-ui/dynamic-tooltip";
 import { Card } from "../ui/card";
+import { Skeleton } from "../ui/skeleton";
 
 const LastResultsTable = () => {
-  const { listResults, setListResults, addLastGeneratedFeedback } =
+  const { listResults, setListResults, addLastGeneratedFeedback, isLoading } =
     useAppStore();
 
   // update the urls in case of page reload
@@ -29,6 +30,9 @@ const LastResultsTable = () => {
     };
   }, [resetResumeUrl]);
 
+  if (isLoading || listResults.length === 0) {
+    return <TableSkeleton />;
+  }
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-3xl text-start w-full font-alegreya font-semibold lg:px-2">
@@ -121,3 +125,63 @@ const LastResultsTable = () => {
 };
 
 export default LastResultsTable;
+
+const TableSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-4 items-start">
+      <div className="lg:px-2">
+        <Skeleton className="w-80 h-9 mx-auto " />
+      </div>
+      <Card className="overflow-hidden w-full">
+        <div className="flex flex-col overflow-x-scroll lg:overflow-x-hidden md:overflow-x-hidden lg:overflow-y-hidden">
+          <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <table className="min-w-full divide-y divide-muted">
+                <thead className="text-primary font-alegreya text-base">
+                  <tr>
+                    <th className="py-3.5 pl-6 pr-3 text-left font-semibold">
+                      Id
+                    </th>
+                    <th className="py-3.5 pl-6 pr-3 text-left font-semibold">
+                      Resume List
+                    </th>
+                    <th className="py-3.5 pl-6 pr-3 text-center font-semibold">
+                      ATS Score
+                    </th>
+                    <th className="py-3.5 pl-6 pr-3 text-center font-semibold">
+                      Breakdown
+                    </th>
+                    <th className="py-3.5 pl-6 pr-3 text-center font-semibold">
+                      View Resume
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-muted text-sm">
+                  {[...Array(2)].map((_, index) => (
+                    <tr key={index}>
+                      <td className="py-4 pl-6 pr-3">
+                        <Skeleton className="w-6 h-4" />
+                      </td>
+                      <td className="py-4 pl-6 pr-3">
+                        <Skeleton className="w-32 h-4" />
+                      </td>
+                      <td className="py-4 pl-6 pr-3 text-center">
+                        <Skeleton className="w-12 h-4 mx-auto" />
+                      </td>
+                      <td className="py-4 pl-6 pr-3 text-center">
+                        <Skeleton className="w-20 h-4 mx-auto" />
+                      </td>
+                      <td className="py-4 pl-6 pr-3 text-center">
+                        <Skeleton className="w-20 h-4 mx-auto" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+};

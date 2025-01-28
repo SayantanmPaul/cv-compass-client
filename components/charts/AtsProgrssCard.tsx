@@ -5,11 +5,12 @@ import { Skeleton } from "../ui/skeleton";
 
 interface ProgressBarProps {
   progress?: number;
+  isLoading?: boolean;
 }
-const AtsProgrssCard = ({ progress }: ProgressBarProps) => {
+const AtsProgrssCard = ({ progress, isLoading }: ProgressBarProps) => {
   const dots = Array.from({ length: 25 }, (_, i) => i);
 
-  if (!progress) {
+  if (isLoading || !progress) {
     return <AtsProgrssCardSkeleton />;
   }
 

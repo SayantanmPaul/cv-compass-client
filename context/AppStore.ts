@@ -10,6 +10,8 @@ interface UserPreferences {
   listResults: ATSFeedback[];
   setListResults: (result: ATSFeedback[]) => void;
   // updateResultToList: (result: ATSFeedback[]) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
 export const useAppStore = create<UserPreferences>()(
@@ -18,6 +20,7 @@ export const useAppStore = create<UserPreferences>()(
       userType: { recruiter: true, candidate: false },
       lastGeneratedFeedback: null,
       listResults: [],
+      isLoading: false,
 
       setUserType: (type) =>
         set(() => ({
@@ -35,6 +38,9 @@ export const useAppStore = create<UserPreferences>()(
 
       setListResults: (results: ATSFeedback[]) =>
         set(() => ({ listResults: results.slice(0, 3) })),
+
+      setIsLoading: (isLoading: boolean) =>
+        set(() => ({ isLoading: isLoading })),
     }),
     {
       name: "cvcompass-userpreference",

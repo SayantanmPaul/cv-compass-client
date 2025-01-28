@@ -12,7 +12,7 @@ import FilterCheckBoxInput from "./filter-checkbox";
 import LastResultsTable from "../table/LastResultsTable";
 
 const CandidateEvaluationSection = () => {
-  const { userType, lastGeneratedFeedback } = useAppStore();
+  const { userType, lastGeneratedFeedback, isLoading } = useAppStore();
 
   const basePadding = "lg:px-2 md:px-2 px-1";
 
@@ -24,28 +24,38 @@ const CandidateEvaluationSection = () => {
             <ATSBreakDownRaderChart
               atsBreakDownData={lastGeneratedFeedback?.atsBreakDown}
               atsScore={lastGeneratedFeedback?.atsScore}
+              isLoading={isLoading}
             />
             <div className={` py-3 ${basePadding}`}>
-              <CandidateSummary summary={lastGeneratedFeedback?.summary} />
+              <CandidateSummary
+                summary={lastGeneratedFeedback?.summary}
+                isLoading={isLoading}
+              />
             </div>
             <div className={`pb-3 ${basePadding}`}>
               <MissingKeywordsBadgesSection
                 badges={lastGeneratedFeedback?.missingKeywords}
+                isLoading={isLoading}
               />
             </div>
           </div>
           <div className="w-full flex flex-col gap-4">
             <div className="w-full relative">
-              <AtsProgrssCard progress={lastGeneratedFeedback?.atsScore} />
+              <AtsProgrssCard
+                progress={lastGeneratedFeedback?.atsScore}
+                isLoading={isLoading}
+              />
             </div>
             <div className={`w-full pb-3 lg:p-3 ${basePadding}`}>
               <RelevantKeywordsBadgesSection
                 badges={lastGeneratedFeedback?.relavantKeywords}
+                isLoading={isLoading}
               />
             </div>
             <AtsBreakdownBarChart
               atsBreakDownData={lastGeneratedFeedback?.atsBreakDown}
               atsScore={lastGeneratedFeedback?.atsScore}
+              isLoading={isLoading}
             />
           </div>
         </div>
@@ -60,32 +70,42 @@ const CandidateEvaluationSection = () => {
         <div className="w-full flex lg:flex-row md:flex-row flex-col-reverse justify-between gap-4">
           <div className="w-full flex flex-col gap-4">
             <div className={`${basePadding}`}>
-              <CandidateSummary summary={lastGeneratedFeedback?.summary} />
+              <CandidateSummary
+                summary={lastGeneratedFeedback?.summary}
+                isLoading={isLoading}
+              />
             </div>
             <div className={` ${basePadding}`}>
               <MissingKeywordsBadgesSection
                 badges={lastGeneratedFeedback?.missingKeywords}
+                isLoading={isLoading}
               />
             </div>
             <div className={` py-3 ${basePadding}`}>
               <RelevantKeywordsBadgesSection
                 badges={lastGeneratedFeedback?.relavantKeywords}
+                isLoading={isLoading}
               />
             </div>
           </div>
           <div className="w-full flex flex-col gap-4">
             <div className="w-full relative">
-              <AtsProgrssCard progress={lastGeneratedFeedback?.atsScore} />
+              <AtsProgrssCard
+                progress={lastGeneratedFeedback?.atsScore}
+                isLoading={isLoading}
+              />
             </div>
             <AtsBreakdownBarChart
               atsBreakDownData={lastGeneratedFeedback?.atsBreakDown}
               atsScore={lastGeneratedFeedback?.atsScore}
+              isLoading={isLoading}
             />
           </div>
         </div>
         <div className="lg:p-3 p-1">
           <CandidateEvaludationFeedback
             feedbacks={lastGeneratedFeedback?.feedback}
+            isLoading={isLoading}
           />
         </div>
       </>
@@ -93,10 +113,7 @@ const CandidateEvaluationSection = () => {
   };
 
   return (
-    <div
-      className="w-full flex flex-col lg:gap-10 gap-6 py-6"
-      id="generated-feedback"
-    >
+    <div className="w-full flex flex-col  gap-6 py-6" id="generated-feedback">
       <div className="w-full flex items-end justify-end">
         <FilterCheckBoxInput />
       </div>
@@ -109,8 +126,14 @@ const CandidateEvaluationSection = () => {
 
 export default CandidateEvaluationSection;
 
-const CandidateSummary = ({ summary }: { summary?: string }) => {
-  if (!summary) {
+const CandidateSummary = ({
+  summary,
+  isLoading,
+}: {
+  summary?: string;
+  isLoading?: boolean;
+}) => {
+  if (isLoading || !summary) {
     return <CandidateSummarySkeleton />;
   }
   return (
@@ -123,8 +146,14 @@ const CandidateSummary = ({ summary }: { summary?: string }) => {
   );
 };
 
-const RelevantKeywordsBadgesSection = ({ badges }: { badges?: string[] }) => {
-  if (!badges) {
+const RelevantKeywordsBadgesSection = ({
+  badges,
+  isLoading,
+}: {
+  badges?: string[];
+  isLoading?: boolean;
+}) => {
+  if (isLoading || !badges) {
     return <KeywordsBadgeSkeleton />;
   }
   return (
@@ -148,8 +177,14 @@ const RelevantKeywordsBadgesSection = ({ badges }: { badges?: string[] }) => {
   );
 };
 
-const MissingKeywordsBadgesSection = ({ badges }: { badges?: string[] }) => {
-  if (!badges) {
+const MissingKeywordsBadgesSection = ({
+  badges,
+  isLoading,
+}: {
+  badges?: string[];
+  isLoading?: boolean;
+}) => {
+  if (isLoading || !badges) {
     return <KeywordsBadgeSkeleton />;
   }
   return (
@@ -175,10 +210,12 @@ const MissingKeywordsBadgesSection = ({ badges }: { badges?: string[] }) => {
 
 const CandidateEvaludationFeedback = ({
   feedbacks,
+  isLoading,
 }: {
   feedbacks?: string[];
+  isLoading?: boolean;
 }) => {
-  if (!feedbacks) {
+  if (isLoading || !feedbacks) {
     return <CandidateFeedbacksSkeleton />;
   }
   return (
