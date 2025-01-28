@@ -1,6 +1,4 @@
 "use client";
-
-import { TrendingUp } from "lucide-react";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
 import {
@@ -17,44 +15,47 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { AtsBreakDownType } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
 
-const atsData = {
-  atsScore: 67,
-  atsBreakDown: {
-    "Keyword Matches": 43,
-    Experiences: 20,
-    "Project Relevance": 25,
-    Achievements: 12,
-  },
-};
+const ATSBreakDownRaderChart = ({
+  atsBreakDownData,
+  atsScore,
+}: {
+  atsBreakDownData?: AtsBreakDownType;
+  atsScore?: number;
+}) => {
+  // const totalScore = Object.values(atsData.atsBreakDown).reduce(
+  //   (sum, value) => sum + value,
+  //   0
+  // );
+  // const percentageIncrease =
+  //   ((atsData.atsScore - totalScore) / totalScore) * 100;
 
-const raderPlotData = Object.entries(atsData.atsBreakDown).map(
-  ([category, value]) => ({
-    category: category,
-    value: value,
-  })
-);
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
-  },
-} satisfies ChartConfig;
-
-const ATSBreakDownRaderChart = () => {
-  const totalScore = Object.values(atsData.atsBreakDown).reduce(
-    (sum, value) => sum + value,
-    0
-  );
-  const percentageIncrease =
-    ((atsData.atsScore - totalScore) / totalScore) * 100;
-
-  if (!atsData) {
+  if (!atsBreakDownData || !atsScore) {
     return <RaderCardSkeleton />;
   }
 
+  const keyNames: Record<string, string> = {
+    keywordMatching: "keyword Matches",
+    yearsOfExperience: "Experience",
+    quantifiableAchievements: "Achievements",
+    projectRelevance: "Project Relevance",
+  };
+
+  const raderPlotData = Object.entries(atsBreakDownData).map(
+    ([key, value]) => ({
+      category: keyNames[key] || key,
+      value: value,
+    })
+  );
+
+  const chartConfig = {
+    desktop: {
+      label: "Desktop",
+      color: "hsl(var(--chart-1))",
+    },
+  } satisfies ChartConfig;
   return (
     <Card>
       <CardHeader className="items-center pb-4 ">
@@ -66,12 +67,20 @@ const ATSBreakDownRaderChart = () => {
       <CardContent className="pb-0">
         <ChartContainer
           config={chartConfig}
-          className="max-w-full mx-auto max-h-72"
+          className="max-w-full mx-auto max-h-84"
         >
           <RadarChart data={raderPlotData} className="w-full h-full">
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <ChartTooltip cursor={true} content={<ChartTooltipContent />} />
+            <PolarAngleAxis
+              dataKey="category"
+              className="font-secondary"
+              tick={{
+                radius: 170,
+              }}
+              tickLine={true}
+              tickFormatter={(value) => value}
+            />
             <PolarGrid gridType="circle" />
-            <PolarAngleAxis dataKey="category" className="font-secondary" />
             <Radar
               dataKey="value"
               fill="var(--color-desktop)"
@@ -86,18 +95,8 @@ const ATSBreakDownRaderChart = () => {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          {percentageIncrease > 0
-            ? `Score Increased by ${percentageIncrease.toFixed(2)}%`
-            : `Score is matching with total breakdown`}{" "}
-          <TrendingUp
-            className={`h-4 w-4 ${
-              percentageIncrease > 0 ? "text-green-500" : "hidden"
-            }`}
-          />
-        </div>
         <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          January - June 2024
+          January - June 2025
         </div>
       </CardFooter>
     </Card>

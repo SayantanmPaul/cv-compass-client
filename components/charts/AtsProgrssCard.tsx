@@ -1,31 +1,26 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { InfoIcon } from "lucide-react";
+import DynamicTooltip from "../app-ui/dynamic-tooltip";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
 interface ProgressBarProps {
-  progress: number;
+  progress?: number;
 }
 const AtsProgrssCard = ({ progress }: ProgressBarProps) => {
   const dots = Array.from({ length: 25 }, (_, i) => i);
-  const isProgrssDots = (index: number) => index < Math.ceil(progress / 4);
 
   if (!progress) {
     return <AtsProgrssCardSkeleton />;
   }
 
+  const isProgrssDots = (index: number) => index < Math.ceil(progress / 4);
   return (
     <Card className="w-full h-full">
       <CardContent>
         <div className="flex items-end justify-between">
-          <div className="text-2xl font-alegreya font-semibold pt-4 pb-3 flex items-center gap-3 ">
-            Overall Score <HeaderTooltipContent />
+          <div className="text-2xl font-alegreya font-semibold pt-4 pb-3 flex items-center ">
+            Overall Score{" "}
+            <DynamicTooltip content="This score may not be optimal everytime" />
           </div>
           <p className="pb-3 font-secondary font-semibold text-sm select-none">
             {progress} %
@@ -52,24 +47,6 @@ const AtsProgrssCard = ({ progress }: ProgressBarProps) => {
 };
 
 export default AtsProgrssCard;
-
-const HeaderTooltipContent = () => {
-  return (
-    <TooltipProvider>
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger type="button" aria-label="tooltip">
-          <InfoIcon className="w-4 h-4" />
-        </TooltipTrigger>
-        <TooltipContent
-          align="start"
-          className="text-xs font-secondary rounded-none bg-background border-[#D7700B]/20 select-none "
-        >
-          <p>This score may not be optimal everytime</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-};
 
 const AtsProgrssCardSkeleton = () => {
   const dots = Array.from({ length: 25 }, (_, i) => i);

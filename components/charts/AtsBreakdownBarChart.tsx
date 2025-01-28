@@ -25,54 +25,61 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Skeleton } from "../ui/skeleton";
+import { AtsBreakDownType } from "@/lib/types";
 
-const atsData = {
-  atsScore: 48,
-  atsBreakDown: {
-    "Keyword Matching": 43,
-    Experiences: 20,
-    "Project Relevance": 25,
-    Achievements: 12,
-  },
-};
-
-const chartData = Object.entries(atsData.atsBreakDown).map(
-  ([category, value]) => ({
-    category,
-    value,
-    fill: `hsl(var(--chart-${
-      Object.keys(atsData.atsBreakDown).indexOf(category) + 1
-    }))`,
-  })
-);
-
-const chartConfig = {
-  value: {
-    label: "Score",
-  },
-  label: {
-    color: "hsl(var(--background))",
-  },
-} satisfies ChartConfig;
-
-let footerMessage = "";
-let trendingIcon = null;
-
-if (atsData.atsScore >= 70) {
-  footerMessage = "High Match: Candidate is highly suitable for this role.";
-  trendingIcon = <TrendingUp className="h-4 w-4 text-green-500 " />;
-} else if (atsData.atsScore >= 50) {
-  footerMessage = "Modarate Match: candidate required a recheck for this role.";
-  trendingIcon = <TrendingUp className="h-4 w-4 text-yellow-500" />;
-} else {
-  footerMessage = "Low Match: Candidate may not be a strong fit for this role.";
-  trendingIcon = <TrendingUp className="h-4 w-4 text-red-500" />;
-}
-
-const AtsBreakdownBarChart = () => {
-  if (!atsData) {
+const AtsBreakdownBarChart = ({
+  atsBreakDownData,
+  atsScore,
+}: {
+  atsBreakDownData?: AtsBreakDownType;
+  atsScore?: number;
+}) => {
+  if (!atsBreakDownData || !atsScore) {
     return <BarChartSkeleton />;
   }
+
+  const keyNames: Record<string, string> = {
+    keywordMatching: "keyword Matches",
+    yearsOfExperience: "Experience",
+    quantifiableAchievements: "Achievements",
+    projectRelevance: "Project Relevance",
+  };
+
+  const chartData = Object.entries(atsBreakDownData).map(
+    ([category, value]) => ({
+      category: keyNames[category] || category,
+      value: value,
+      fill: `hsl(var(--chart-${
+        Object.keys(atsBreakDownData).indexOf(category) + 1
+      }))`,
+    })
+  );
+
+  let footerMessage = "";
+  let trendingIcon = null;
+
+  if (atsScore >= 70) {
+    footerMessage = "High Match: Candidate is highly suitable for this role.";
+    trendingIcon = <TrendingUp className="h-4 w-4 text-green-500 " />;
+  } else if (atsScore >= 50) {
+    footerMessage =
+      "Modarate Match: candidate required a recheck for this role.";
+    trendingIcon = <TrendingUp className="h-4 w-4 text-yellow-500" />;
+  } else {
+    footerMessage =
+      "Low Match: Candidate may not be a strong fit for this role.";
+    trendingIcon = <TrendingUp className="h-4 w-4 text-red-500" />;
+  }
+
+  const chartConfig = {
+    value: {
+      label: "Score",
+    },
+    label: {
+      color: "hsl(var(--background))",
+    },
+  } satisfies ChartConfig;
+
   return (
     <Card>
       <CardHeader>

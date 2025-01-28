@@ -1,8 +1,9 @@
+import { useAppStore } from "@/context/AppStore";
 import { toast } from "@/hooks/use-toast";
 import { useGenerateFeadback } from "@/lib/react-query/queries";
 import { FormInput } from "@/lib/types";
 import { AxiosError } from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FileUpload } from "../ui/file-upload";
 import { Textarea } from "../ui/textarea";
@@ -20,15 +21,35 @@ const ResumeParserForm: React.FC = () => {
     control,
     handleSubmit,
     setError,
+    reset,
   } = useForm({
     defaultValues: {
       jobDescription: "",
-      resume: null,
+      resume: null as File | null,
     },
   });
 
   const { mutate: GenerateFeadbackFn, isPending } = useGenerateFeadback();
+  const {
+    addLastGeneratedFeedback,
+    lastGeneratedFeedback,
+    setListResults,
+    listResults,
+  } = useAppStore();
 
+  const [resumeURL, setResumeURL] = useState<string | null>("");
+  const [resumeFileName, setResumeFileName] = useState<string | null>("");
+
+  // Populate form with values from Zustand if available
+  useEffect(() => {
+    if (lastGeneratedFeedback?.jobDescription) {
+      reset({
+        jobDescription: lastGeneratedFeedback?.jobDescription || "",
+      });
+    }
+  }, [lastGeneratedFeedback, reset]);
+
+  // backend error handling
   const handleAPIError = (error: AxiosError | Error) => {
     let message = "Something went wrong. Please try again later.";
 
@@ -54,6 +75,14 @@ const ResumeParserForm: React.FC = () => {
     });
   };
 
+  const handleFileChange = (file: File | null) => {
+    if (file) {
+      setResumeFileName(file.name);
+      const url = URL.createObjectURL(file);
+      setResumeURL(url);
+    }
+  };
+  // submit handler fn
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     try {
       GenerateFeadbackFn(
@@ -62,8 +91,52 @@ const ResumeParserForm: React.FC = () => {
           jobDescription: data.jobDescription,
         },
         {
-          onSuccess: (data) => {
-            console.log(data);
+          onSuccess: (result) => {
+            addLastGeneratedFeedback({
+              atsScore: result.data.atsScore,
+              atsBreakDown: {
+                keywordMatching: result.data.atsBreakDown.keywordMatching,
+                yearsOfExperience: result.data.atsBreakDown.yearsOfExperience,
+                projectRelevance: result.data.atsBreakDown.projectRelevance,
+                quantifiableAchievements:
+                  result.data.atsBreakDown.quantifiableAchievements,
+              },
+              summary: result.data.summary,
+              feedback: result.data.feedback,
+              missingKeywords: result.data.missingKeywords,
+              relavantKeywords: result.data.relavantKeywords,
+              //form input store in zustand
+              jobDescription: data.jobDescription,
+              resumeUrl: resumeURL,
+              resumeFileName: resumeFileName,
+            });
+            setListResults(
+              [
+                {
+                  atsScore: result.data.atsScore,
+                  atsBreakDown: {
+                    keywordMatching: result.data.atsBreakDown.keywordMatching,
+                    yearsOfExperience:
+                      result.data.atsBreakDown.yearsOfExperience,
+                    projectRelevance: result.data.atsBreakDown.projectRelevance,
+                    quantifiableAchievements:
+                      result.data.atsBreakDown.quantifiableAchievements,
+                  },
+                  summary: result.data.summary,
+                  feedback: result.data.feedback,
+                  missingKeywords: result.data.missingKeywords,
+                  relavantKeywords: result.data.relavantKeywords,
+                  //form input store in zustand
+                  jobDescription: data.jobDescription,
+                  resumeUrl: resumeURL,
+                  resumeFileName: resumeFileName,
+                },
+                ...listResults,
+              ].slice(0, 3)
+            );
+            // go to result section if success
+            const reultsDiv = document.getElementById("generated-feedback");
+            reultsDiv?.scrollIntoView();
           },
           onError: (error) => {
             handleAPIError(error);
@@ -93,7 +166,10 @@ const ResumeParserForm: React.FC = () => {
             <FileUpload
               value={field.value}
               error={errors.resume?.message}
-              onChange={field.onChange}
+              onChange={(file) => {
+                field.onChange(file);
+                handleFileChange(file);
+              }}
             />
           )}
         />
