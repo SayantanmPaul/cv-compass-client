@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+"use client";
+
 import lottie from "lottie-web";
+import { useEffect } from "react";
 
 const UnderLineLottie = () => {
   useEffect(() => {

@@ -1,5 +1,3 @@
-"use client";
-
 import LlamaPoweredButton from "@/components/app-ui/lama-powered-button";
 import ProductLogoGeometry from "@/components/app-ui/product-logo-geometry";
 import dynamic from "next/dynamic";

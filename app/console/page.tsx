@@ -41,11 +41,12 @@ const ConsolePage = () => {
 
 export default ConsolePage;
 
+// loading state
 const LoadingStateTextShimmer = () => {
   const { isLoading } = useAppStore();
   return (
     <TextShimmer className={`font-mono text-sm `} duration={isLoading ? 1 : 0}>
-      generating the candidate's score...
+      generating the candidate&apos;s score...
     </TextShimmer>
   );
 };

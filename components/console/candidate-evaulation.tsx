@@ -16,6 +16,7 @@ const CandidateEvaluationSection = () => {
 
   const basePadding = "lg:px-2 md:px-2 px-1";
 
+  // recruiter view layout
   const RecruterViewJSX = () => {
     return (
       <div className="flex flex-col gap-4">
@@ -64,6 +65,7 @@ const CandidateEvaluationSection = () => {
     );
   };
 
+  // candidate view layout
   const CandidateViewJSX = () => {
     return (
       <>
@@ -126,6 +128,7 @@ const CandidateEvaluationSection = () => {
 
 export default CandidateEvaluationSection;
 
+// candidate summary
 const CandidateSummary = ({
   summary,
   isLoading,
@@ -146,6 +149,7 @@ const CandidateSummary = ({
   );
 };
 
+// relavent keywords
 const RelevantKeywordsBadgesSection = ({
   badges,
   isLoading,
@@ -177,6 +181,7 @@ const RelevantKeywordsBadgesSection = ({
   );
 };
 
+// missing keywords
 const MissingKeywordsBadgesSection = ({
   badges,
   isLoading,
@@ -208,6 +213,7 @@ const MissingKeywordsBadgesSection = ({
   );
 };
 
+// feedback for the candidate 
 const CandidateEvaludationFeedback = ({
   feedbacks,
   isLoading,

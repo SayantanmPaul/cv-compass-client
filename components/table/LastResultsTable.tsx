@@ -45,6 +45,8 @@ const LastResultsTable = () => {
           <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8 ">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <table className="min-w-full divide-y divide-muted">
+                {/* table header */}
+
                 <thead className="text-primary font-alegreya text-base">
                   <tr>
                     <th
@@ -79,6 +81,8 @@ const LastResultsTable = () => {
                     </th>
                   </tr>
                 </thead>
+
+                {/* table body */}
                 <tbody className="divide-y divide-muted text-accent font-secondary text-sm">
                   {listResults.map((item, index) => (
                     <tr key={index}>
