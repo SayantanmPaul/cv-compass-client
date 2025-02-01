@@ -29,7 +29,7 @@ const ImpactSection = () => {
       className="flex flex-col gap-10 lg:items-start md:items-center items-start justify-center w-full max-w-screen-2xl lg:px-3 relative"
     >
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 0 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
         className="flex flex-col gap-2 lg:items-start md:items-center items-start justify-center"
@@ -41,7 +41,7 @@ const ImpactSection = () => {
       </motion.div>
       <div className="flex lg:flex-row flex-col items-center justify-between w-full gap-0 ">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 0 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           className="w-full h-fit flex flex-col justify-start lg:max-w-2xl md:max-w-xl max-w-sm "
@@ -55,9 +55,9 @@ const ImpactSection = () => {
         )}
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 0 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
           className="max-w-2xl"
         >
           <ArchitectureBeamDiv />
