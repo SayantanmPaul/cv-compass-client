@@ -20,7 +20,7 @@ const UnderLineLottie = () => {
     return () => animation.destroy();
   }, []);
 
-  return <div id="glint" className="w-36 h-8"></div>;
+  return <div id="glint" className="w-40 h-8"></div>;
 };
 
 export default UnderLineLottie;

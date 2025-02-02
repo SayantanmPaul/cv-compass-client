@@ -4,7 +4,7 @@ import FeatureList from "@/components/landing/featurelist";
 import HeaderComp from "@/components/landing/header";
 import HeroSection from "@/components/landing/hero";
 import ImpactSection from "@/components/landing/impact";
-// import UserVisitsTSX from "@/components/landing/user-visits";
+import LiveVisitorCount from "@/components/landing/user-visits";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -21,15 +21,15 @@ export default function Home() {
       <HeaderComp />
       {/* Hero Section */}
       <HeroSection />
-      <div className="flex flex-col items-center lg:gap-20 gap-16">
+      <div className="flex flex-col items-center lg:gap-20 gap-16 w-full">
         <div className="w-full flex justify-center">
           <ImpactSection />
         </div>
         <LineBreak />
         <FeatureList />
         <LineBreak />
+        <LiveVisitorCount />
       </div>
-      {/* <UserVisitsTSX /> */}
     </motion.div>
   );
 }

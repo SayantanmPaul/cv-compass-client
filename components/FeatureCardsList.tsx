@@ -19,7 +19,7 @@ export function FeaturesCardList() {
         {grid.map((feature) => (
           <div
             key={feature.title}
-            className={`relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white  border border-[#d6be99]/40 group h-60 hover:shadow-2xl duration-300 ease-in-out lg:max-w-80 md:max-w-56 max-w-1/2`}
+            className={`relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white  border border-[#d6be99]/40 group lg:h-60 md:h-80 h-auto hover:shadow-2xl duration-300 ease-in-out w-full lg:max-w-80 md:max-w-[228px] max-w-1/2`}
           >
             <Icon className="absolute h-6 w-6 -top-3 -left-3 text-accent" />
             <Icon className="absolute h-6 w-6 -bottom-3 -left-3 text-accent" />
@@ -82,7 +82,7 @@ const grid = [
   {
     title: "Open Source",
     description:
-      "We value transparency. Our code is available on GitHub, allowing you to contribute ideas and improvements.",
+      "Code that you can trust. Join us on Github and contirute your ideas and improvements to make impact.",
     icon: <AmpersandIcon className="w-5 h-5" />,
   },
 ];

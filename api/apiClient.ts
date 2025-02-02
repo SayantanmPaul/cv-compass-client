@@ -1,7 +1,7 @@
 import { FormInput } from "@/lib/types";
 import axios from "axios";
 
-const isDevMode = false;
+const isDevMode = true;
 
 const BASE_URL = "http://localhost:4001/api/";
 
@@ -32,6 +32,15 @@ export const generateFeedback = async (data: FormInput) => {
         "Content-Type": "multipart/form-data",
       },
     });
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getVisitsCount = async () => {
+  try {
+    const res = await axiosCLient.get("/visits");
     return res.data;
   } catch (err) {
     throw err;
