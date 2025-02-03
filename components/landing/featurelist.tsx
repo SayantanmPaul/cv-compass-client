@@ -4,7 +4,7 @@ import { FlipWords } from "../ui/flip-words";
 
 const FeatureList = () => {
   return (
-    <div className="flex flex-col items-center gap-6 lg:gap-10 ">
+    <div id="features" className="flex flex-col items-center gap-6 lg:gap-10 ">
       <div className="lg:px-8 md:px-0 items-start md:justify-center w-full">
         <HeaderText />
       </div>

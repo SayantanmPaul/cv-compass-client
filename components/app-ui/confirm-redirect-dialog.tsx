@@ -22,7 +22,7 @@ const ConfirmRedirect = () => {
   };
 
   const navOptionsClass =
-    "hover:underline hover:font-black hover:text-slate-50 underline-offset-2 ease-in-out duration-200 cursor-pointer";
+    "hover:underline hover:font-semibold hover:text-slate-50 no-underline underline-offset-2 ease-in-out duration-200 cursor-pointer";
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

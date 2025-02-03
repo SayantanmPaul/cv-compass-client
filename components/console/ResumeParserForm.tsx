@@ -140,8 +140,10 @@ const ResumeParserForm: React.FC = () => {
               ].slice(0, 3)
             );
             // go to result section if success
-            const reultsDiv = document.getElementById("generated-feedback");
-            reultsDiv?.scrollIntoView();
+            if (typeof window !== "undefined" && listResults.length > 0) {
+              const resultsDiv = document.getElementById("generated-feedback");
+              resultsDiv?.scrollIntoView();
+            }
           },
           onError: (error) => {
             handleAPIError(error);
