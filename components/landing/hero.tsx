@@ -15,7 +15,6 @@ const UnderLineLottie = dynamic(
 
 // lg:min-h-[5em] md:min-h-[5em] min-h-[4em]
 // lg:min-h-[46em] md:min-h-[35em] min-h-screen
-
 const HeroSection = () => {
   return (
     <motion.div className="w-fit flex items-center justify-between h-full lg:min-h-[40em] md:min-h-[35em] min-h-screen overflow-hidden">
@@ -35,11 +34,11 @@ const HeroSection = () => {
             <LlamaPoweredButton />
           </motion.div>
           <TextGenerateEffect
-            words="Accelerate talent match, find right talents, amplify Quality."
-            className="font-alegreya text-5xl font-medium z-10"
+            words="Accelerate talent match, find right talents, amplify Quality"
+            className="font-alegreya italic lg:text-[54px] text-5xl font-semibold z-10"
             duration={0.6}
           />
-          <span className="absolute lg:left-[320px] md:left-[320px] left-0 -bottom-2 z-0">
+          <span className="absolute lg:left-[330px] md:left-[320px] left-0 -bottom-2 z-0">
             <UnderLineLottie />
           </span>
         </motion.div>

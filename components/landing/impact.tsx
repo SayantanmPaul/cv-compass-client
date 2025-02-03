@@ -35,7 +35,7 @@ const ImpactSection = () => {
         className="flex flex-col gap-2 lg:items-start md:items-center items-start justify-center"
       >
         <HeaderText />
-        <p className="font-brand font-semibold lg:text-base text-sm text-accent px-2">
+        <p className="font-brand font-semibold lg:text-base text-sm text-accent ">
           ...well maybe not much. But we can always take the first step, right?
         </p>
       </motion.div>
@@ -136,10 +136,10 @@ const HeaderText = () => {
   const shadowColor = theme.resolvedTheme === "dark" ? "white" : "black";
 
   return (
-    <h1 className="text-balance font-semibold leading-none tracking-tighter text-4xl md:text-3xl lg:text-5xl font-brand">
+    <h1 className="text-balance font-semibold leading-none tracking-tighter text-3xl md:text-3xl lg:text-[42px] font-brand">
       Are we even making any
       <LineShadowText
-        className="italic ml-3 font-alegreya font-semibold lg:text-7xl md:text-5xl text-5xl"
+        className="italic ml-3  font-alegreya font-semibold lg:text-6xl md:text-5xl text-5xl"
         shadowColor={shadowColor}
       >
         Impact?

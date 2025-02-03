@@ -8,7 +8,7 @@ import { ArrowUpRightIcon, CopyrightIcon } from "lucide-react";
 const Footer = () => {
   return (
     <div className="relative w-full overflow-hidden lg:h-60 h-full flex size-full items-center justify-center">
-      <div className="flex lg:flex-row md:flex-row flex-col size-full lg:items-end md:items-end h-fit justify-between lg:max-w-screen-xl gap-8">
+      <div className="flex lg:flex-row md:flex-row flex-col size-full lg:items-end md:items-end h-fit justify-between lg:max-w-screen-xl gap-8 py-12 md:py-8 lg:py-4">
         <div className="flex flex-col gap-1">
           <FooterProductLogo />
           <p className="font-alegreya text-lg italic max-w-60 text-accent">
