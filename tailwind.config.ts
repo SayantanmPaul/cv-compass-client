@@ -1,5 +1,6 @@
 import tailwindcssAnimate from "tailwindcss-animate";
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+import tailwindTypography from "@tailwindcss/typography";
 
 module.exports = {
   content: [
@@ -84,7 +85,7 @@ module.exports = {
       },
     },
   },
-  plugins: [tailwindcssAnimate, addVariablesForColors],
+  plugins: [tailwindcssAnimate, tailwindTypography, addVariablesForColors],
 };
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
