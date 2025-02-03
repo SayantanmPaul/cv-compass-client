@@ -7,6 +7,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@openstatus/react/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {

@@ -8,12 +8,13 @@ import { Icon } from "../FeatureCardsList";
 import { GridPattern } from "../ui/file-upload";
 import { NumberTicker } from "../ui/number-ticker";
 import { Skeleton } from "../ui/skeleton";
+import OpenStatusStat from "../app-ui/openstatus";
 
 export default function LiveVisitorCount() {
   const { data, isLoading } = useVisitorCount();
 
   return (
-    <Card className="w-full lg:max-w-7xl md:max-w-3xl max-w-full flex flex-col justify-center my-auto border border-[#d6be99]/40 relative min-h-60 group">
+    <Card className="w-full lg:max-w-7xl md:max-w-3xl max-w-full flex flex-col justify-center my-auto border border-[#d6be99]/40 relative lg:min-h-60 group">
       <Icon className="absolute h-6 w-6 -top-3 -left-3 text-accent" />
       <Icon className="absolute h-6 w-6 -bottom-3 -left-3 text-accent" />
       <Icon className="absolute h-6 w-6 -top-3 -right-3 text-accent" />
@@ -32,7 +33,7 @@ export default function LiveVisitorCount() {
               <p className="font-brand font-semibold text-sm lg:text-base text-accent px-1">
                 Let us share how many users we are able to reach worldwide
               </p>
-              <LiveButton />
+              <OpenStatusStat />
             </CardHeader>
           </div>
           <div className="w-full justify-evenly flex max-w-lg">
@@ -96,23 +97,5 @@ const MetricsCard = ({
         <Skeleton className="w-24 h-8" />
       )}
     </div>
-  );
-};
-
-const LiveButton = () => {
-  return (
-    <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6  text-white inline-block w-fit ">
-      <span className="absolute inset-0 overflow-hidden rounded-full">
-        <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      </span>
-      <div className="relative flex space-x-2 items-center z-10 rounded-full bg-background py-0.5 px-4 ring-1 ring-white/10 ">
-        <span className="font-brand">Live</span>
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-        </span>
-      </div>
-      <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
-    </button>
   );
 };
