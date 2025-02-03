@@ -1,6 +1,7 @@
 "use client";
 
 import FeatureList from "@/components/landing/featurelist";
+import Footer from "@/components/landing/footer";
 import HeaderComp from "@/components/landing/header";
 import HeroSection from "@/components/landing/hero";
 import ImpactSection from "@/components/landing/impact";
@@ -29,6 +30,8 @@ export default function Home() {
         <FeatureList />
         <LineBreak />
         <LiveVisitorCount />
+        <LineBreak />
+        <Footer />
       </div>
     </motion.div>
   );
