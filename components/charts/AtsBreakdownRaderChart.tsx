@@ -96,11 +96,6 @@ const ATSBreakDownRaderChart = ({
           </RadarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          January - June 2025
-        </div>
-      </CardFooter>
     </Card>
   );
 };

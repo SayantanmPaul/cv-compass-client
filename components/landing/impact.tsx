@@ -93,9 +93,9 @@ const ImpactDiv = () => {
         </p>
         <ul className="flex flex-col gap-1 mt-2">
           <Step title="Upload your resume(.pdf) and it's against job description." />
-          <Step title="Create a strong password" />
-          <Step title="Set up two-factor authentication" />
-          <Step title="CVCompass provides a personalized report, highlighting strengths and weaknesses in your resume." />
+          <Step title="Select a llm model for your analysis." />
+          <Step title="CVCompass analyzes your resume in seconds to assess its match for the role." />
+          <Step title="Receive a personalized report highlighting your resume’s strengths and areas for improvement." />
         </ul>
       </div>
     </div>
