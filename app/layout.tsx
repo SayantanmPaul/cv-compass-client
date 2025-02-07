@@ -6,7 +6,7 @@ import QueryProvider from "@/lib/QueryProvider";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
-  title: "CVCompass: AI-Powered Resume Review & Optimization Tool",
+  title: "CVCompass: AI-Powered Resume Review for Hiring Teams & Job Seekers",
   description: "Accelerate talent match, find right talents, amplify Quality.",
   keywords: [
     "free resume review",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "how to pass ATS scan",
   ],
   openGraph: {
-    title: "CVCompass: AI-Powered Resume Review & Optimization Tool",
+    title: "CVCompass: AI-Powered Resume Review for Hiring Teams & Job Seekers",
     description:
       "Accelerate talent match, find right talents, amplify Quality.",
     images: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: "https://cvcompass.sayantanpaul.com",
   },
   twitter: {
-    title: "CVCompass: AI-Powered Resume Review & Optimization Tool",
+    title: "CVCompass: AI-Powered Resume Review for Hiring Teams & Job Seekers",
     description:
       "Accelerate talent match, find right talents, amplify Quality.",
     images: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     site: "@sayantanpaul",
   },
   appleWebApp: {
-    title: "CVCompass: AI-Powered Resume Review & Optimization Tool",
+    title: "CVCompass: AI-Powered Resume Review for Hiring Teams & Job Seekers",
     startupImage: [
       "https://images.pexels.com/photos/30553833/pexels-photo-30553833.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     ],
