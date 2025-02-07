@@ -7,19 +7,30 @@ import HeroSection from "@/components/landing/hero";
 import ImpactSection from "@/components/landing/impact";
 import LiveVisitorCount from "@/components/landing/user-visits";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <motion.div
-      className="w-full h-screen lg:px-16 px-4 py-7 bg-no-repeat lg:bg-contain bg-cover max-w-screen-2xl lg:gap-20 md:gap-6 gap-0 flex flex-col relative"
+      className="w-full h-full lg:px-16 px-4 py-7 bg-no-repeat lg:bg-contain bg-cover lg:max-w-screen-2xl md:max-w-screen-md max-w-full lg:gap-20 md:gap-6 gap-0 flex flex-col relative z-10 "
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      style={{ backgroundImage: "url(/bg-assets/gradient-effect.svg)" }}
+      // style={{ backgroundImage: "url(/bg-assets/gradient-effect.svg)" }}
     >
+      <Image
+        src={"/bg-assets/gradient-effect.svg"}
+        alt="bg-gradient"
+        width={1600}
+        height={1600}
+        draggable={false}
+        className="absolute top-0 left-0 object-cover lg:h-fit lg:w-full h-60"
+      />
       {/* Navbar */}
 
-      <HeaderComp />
+      <div className="z-10 w-full">
+        <HeaderComp />
+      </div>
       {/* Hero Section */}
       <HeroSection />
       <div className="flex flex-col items-center lg:gap-20 gap-16 w-full">
