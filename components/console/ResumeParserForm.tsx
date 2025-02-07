@@ -7,6 +7,15 @@ import React, { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FileUpload } from "../ui/file-upload";
 import { Textarea } from "../ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 const toastStyles = {
   marginTop: "1rem",
@@ -26,6 +35,7 @@ const ResumeParserForm: React.FC = () => {
     defaultValues: {
       jobDescription: "",
       resume: null as File | null,
+      modelName: "Llama-3.3-70b-versatile" as FormInput["modelName"],
     },
   });
 
@@ -94,6 +104,7 @@ const ResumeParserForm: React.FC = () => {
         {
           resume: data.resume,
           jobDescription: data.jobDescription,
+          modelName: data.modelName,
         },
         {
           onSuccess: (result) => {
@@ -160,6 +171,12 @@ const ResumeParserForm: React.FC = () => {
     }
   };
 
+  // model type options: (dynamic fetch in future )
+  const modelOptions: FormInput["modelName"][] = [
+    "Llama-3.3-70b-versatile",
+    "DeepSeek-R1-Distill-Qwen-32B (fine tuned)",
+  ];
+
   return (
     <div className="w-full h-fit flex flex-col items-center lg:gap-5 gap-3 overflow-hidden">
       <h1 className="lg:text-4xl md:text-3xl text-xl font-semibold font-alegreya lg:text-center md:text-center lg:max-w-2xl max-w-lg">
@@ -169,25 +186,35 @@ const ResumeParserForm: React.FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col items-center gap-3"
       >
-        <Controller
-          control={control}
-          name="resume"
-          rules={{ required: "Please provide your resume" }}
-          render={({ field }) => (
-            <FileUpload
-              value={field.value}
-              error={errors.resume?.message}
-              onChange={(file) => {
-                field.onChange(file);
-                handleFileChange(file);
-              }}
-            />
+        {/* file uploader form input */}
+        <div className="w-full flex flex-col gap-1">
+          <Controller
+            control={control}
+            name="resume"
+            rules={{ required: "Please provide your resume" }}
+            render={({ field }) => (
+              <FileUpload
+                value={field.value}
+                error={errors.resume?.message}
+                onChange={(file) => {
+                  field.onChange(file);
+                  handleFileChange(file);
+                }}
+              />
+            )}
+          />
+          {errors.resume && (
+            <span className="text-red-500 lg:text-sm text-xs font-secondary w-full text-start">
+              {errors.resume.message}
+            </span>
           )}
-        />
+        </div>
+
+        {/* job description form input */}
         <div className="w-full flex flex-col gap-1">
           <Textarea
             placeholder="Eg. paste the job description from the job posting or enter a brief summary"
-            rows={15}
+            rows={14}
             style={{ fontSize: "18px" }}
             {...register("jobDescription", {
               required:
@@ -207,6 +234,45 @@ const ResumeParserForm: React.FC = () => {
             </span>
           )}
         </div>
+
+        {/* model name file input */}
+        <div className="w-full flex flex-col gap-1">
+          <Controller
+            control={control}
+            name="modelName"
+            rules={{ required: "Please select a model to continue" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger className="w-full rounded-none bg-transparent backdrop-blur-sm peer font-secondary font-medium border-slate-300/10">
+                  <SelectValue placeholder="Select a model" />
+                </SelectTrigger>
+                <SelectContent className="rounded-none bg-background peer-focus:border-slate-300/30 font-secondary">
+                  <SelectGroup>
+                    <SelectLabel>Select a model</SelectLabel>
+                    {modelOptions.map((model, index) => (
+                      <SelectItem
+                        key={index}
+                        value={model}
+                        disabled={
+                          model === "DeepSeek-R1-Distill-Qwen-32B (fine tuned)"
+                        }
+                      >
+                        {model}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.modelName && (
+            <span className="text-red-500 lg:text-sm text-xs font-secondary w-full text-start">
+              {errors.modelName.message}
+            </span>
+          )}
+        </div>
+
+        {/* submition */}
         <button
           type="submit"
           disabled={isSubmitting || isLoading}
