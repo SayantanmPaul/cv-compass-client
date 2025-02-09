@@ -30,12 +30,12 @@ const ResumeParserForm: React.FC = () => {
     control,
     handleSubmit,
     setError,
-    reset,
+    setValue,
   } = useForm({
     defaultValues: {
       jobDescription: "",
       resume: null as File | null,
-      modelName: "Llama-3.3-70b-versatile" as FormInput["modelName"],
+      modelName: "" as FormInput["modelName"],
     },
   });
 
@@ -55,11 +55,9 @@ const ResumeParserForm: React.FC = () => {
   // Populate form with values from Zustand if available
   useEffect(() => {
     if (lastGeneratedFeedback?.jobDescription) {
-      reset({
-        jobDescription: lastGeneratedFeedback?.jobDescription || "",
-      });
+      setValue("jobDescription", lastGeneratedFeedback.jobDescription);
     }
-  }, [lastGeneratedFeedback, reset]);
+  }, [lastGeneratedFeedback, setValue]);
 
   // backend error handling
   const handleAPIError = (error: AxiosError | Error) => {
@@ -174,7 +172,8 @@ const ResumeParserForm: React.FC = () => {
   // model type options: (dynamic fetch in future )
   const modelOptions: FormInput["modelName"][] = [
     "Llama-3.3-70b-versatile",
-    "DeepSeek-R1-Distill-Qwen-32B (fine tuned)",
+    "DeepSeek-R1-Distill-Qwen-32B",
+    "DeepSeek-R1-Distill-Llama-8B (fine tuned)",
   ];
 
   return (
@@ -248,13 +247,13 @@ const ResumeParserForm: React.FC = () => {
                 </SelectTrigger>
                 <SelectContent className="rounded-none bg-background peer-focus:border-slate-300/30 font-secondary">
                   <SelectGroup>
-                    <SelectLabel>Select a model</SelectLabel>
+                    <SelectLabel>Avaiable models</SelectLabel>
                     {modelOptions.map((model, index) => (
                       <SelectItem
                         key={index}
                         value={model}
                         disabled={
-                          model === "DeepSeek-R1-Distill-Qwen-32B (fine tuned)"
+                          model === "DeepSeek-R1-Distill-Llama-8B (fine tuned)"
                         }
                       >
                         {model}
