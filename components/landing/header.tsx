@@ -1,6 +1,7 @@
 import { ProductLogoWithName } from "@/components/app-ui/productLogoWithName";
 import ConfirmRedirect from "../app-ui/confirm-redirect-dialog";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeaderComp = () => {
   const navOptionsClass =
@@ -18,16 +19,25 @@ const HeaderComp = () => {
         <a href="#features" className={`${navOptionsClass}`}>
           Features
         </a>
-        <span className={`${navOptionsClass}`}>Development Insight</span>
+        <Link href={"/development-insights"}>
+          <span className={`${navOptionsClass}`}>Development Insight</span>
+        </Link>
         <ConfirmRedirect />
       </div>
       <div className="w-fit h-full lg:block block md:hidden">
-        <Image
-          src="/test-images/producthunt.svg"
-          alt="protducthunt"
-          width={150}
-          height={150}
-        />
+        <a
+          href="https://www.producthunt.com/posts/cvcompass?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-cvcompass"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=866108&theme=light&t=1739281974745"
+            alt="CVCompass - Product Hunt"
+            width={150}
+            height={54}
+            unoptimized
+          />
+        </a>
       </div>
     </div>
   );
