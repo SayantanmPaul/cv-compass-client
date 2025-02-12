@@ -8,12 +8,12 @@ const DemoYoutubeModal = () => {
       <HeroVideoDialog
         className="block dark:hidden"
         animationStyle="top-in-bottom-out"
-        videoSrc="https://www.youtube.com/embed/DSgkDuNaWao?rel=0"
+        videoSrc="https://www.youtube.com/embed/D5ZdgJj3WhA?rel=0"
       />
       <HeroVideoDialog
         className="hidden dark:block"
         animationStyle="top-in-bottom-out"
-        videoSrc="https://www.youtube.com/embed/DSgkDuNaWao?rel=0"
+        videoSrc="https://www.youtube.com/embed/D5ZdgJj3WhA?rel=0"
       />
     </div>
   );

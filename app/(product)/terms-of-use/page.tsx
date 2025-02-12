@@ -24,7 +24,7 @@ const TermsOfUsePage = () => {
           <ProductLegalHeader header="Terms  of  Use" />
         </div>
         <div className="max-w-screen-lg w-full flex flex-col justify-start items-center gap-2">
-          <ProductLegalDateWritten />
+          <ProductLegalDateWritten dateString="3rd February 2025" />
           <MarkDown content={TermsOfUseMarkdown} />
         </div>
         <Footer />
@@ -68,4 +68,3 @@ For these and/or other purposes and motivations, and without any expectation of 
 *   d. Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.
 
 For more information, please see: [http://creativecommons.org/](http://creativecommons.org/publicdomain/zero/1.0/)`;
-  

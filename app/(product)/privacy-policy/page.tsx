@@ -24,7 +24,7 @@ const PrivacyPolicyPage = () => {
           <ProductLegalHeader header="Privacy Policy" />
         </div>
         <div className="max-w-screen-lg w-full flex flex-col justify-start items-center gap-2">
-          <ProductLegalDateWritten />
+          <ProductLegalDateWritten dateString="3rd February 2025" />
           <MarkDown content={PolicyMarkDown} />
         </div>
         <Footer />

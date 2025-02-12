@@ -14,11 +14,15 @@ export const ProductLegalHeader = ({ header }: { header: string }) => {
   );
 };
 
-export const ProductLegalDateWritten = () => {
+export const ProductLegalDateWritten = ({
+  dateString,
+}: {
+  dateString: string;
+}) => {
   return (
     <div className="w-full flex items-center justify-start">
       <span className="text-sm text-accent font-secondary font-semibold">
-        Last updated: 3rd February 2025
+        Last updated: {dateString}
       </span>
     </div>
   );
