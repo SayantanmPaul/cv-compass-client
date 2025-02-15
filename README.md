@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CVCompass: LLM-Powered Resume Review for Hiring Teams & Job Seekers
 
-## Getting Started
+![CV-Compass demo](https://github.com/user-attachments/assets/bf82f8a2-cd75-42a8-b87a-cf064dcc7563)
 
-First, run the development server:
+#### This project aims to address the limitations of traditional ATS (Applicant Tracking System) scanners while providing a more intelligent, user-centric solution for job seekers and hiring teams.
+
+### Checkout the demo : [YouTube](https://youtu.be/D5ZdgJj3WhA?si=igRR-B_5ue_4jcpn)
+
+### How CVCompass will help?
+
+It compares the candidate's resume with the specific job requirements and background fit needs and provides a more accurate analysis of the candidate's strengths and relevancy with the job requirement.
+
+
+## Some Quick Features (Beta Launch):
+
+**Different options for LLM:** Our application relies on different large language models (currently: Llama3, DeepSeek r1) to review and score the candidate's strengths.
+
+**No Login Flow:** Breaking the extra barrier between the user and the application. Get started instantly; no sign-up hassle.
+
+**Local Processing:** As there's no user-centric database, most of your data is stored and managed from your cached memory.
+
+**Interactive Charts:** Dynamic, interactive charts to visualize the candidate's strengths, weaknesses, and key insights to make quick decisions.
+
+**Personalized Feedback:** Job description-specific feedback and recommendations to improve the candidate's performance.
+
+
+## Design System of the product:
+
+![image](https://github.com/user-attachments/assets/593868f9-01fa-486e-a4de-454c0fc2f5a8)
+
+### Backend Server Files : [Click here](https://github.com/SayantanmPaul/cv-compass-server)
+
+
+## Run your local development enviornment
+
+Run the following command to build and start the application using Docker Compose:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker-compose up --build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will:
+- Build the Docker image using the Dockerfile
+- Install dependencies
+- Start the application inside a container
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Access the Application
+Once the container is up and running, the application will be accessible at: 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+http://localhost:3000
+```
 
-## Learn More
+#### Stopping the Application
 
-To learn more about Next.js, take a look at the following resources:
+To stop the running containers, use:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker-compose down
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Support the Project
 
-## Deploy on Vercel
+If you find this project helpful, please consider giving it a star on GitHub! ✨
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
