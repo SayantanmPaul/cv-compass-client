@@ -81,7 +81,7 @@ export default function HeroVideoDialog({
       >
         <button
           className={
-            "font-secondary font-bold text-sm relative text-white text-center group flex items-center justify-center gap-2 underline-offset-2 hover:gap-3 ease-in-out duration-200 border border-white lg:border-none md:border-none w-full md:w-auto lg:w-auto py-2 backdrop-blur-sm lg:backdrop-blur-0 md:backdrop-blur-0"
+            "font-secondary font-bold text-sm relative text-white text-center group flex items-center justify-center gap-2 underline-offset-2 hover:gap-3 ease-in-out duration-200 border border-white lg:border-none md:border-none py-2 backdrop-blur-sm lg:backdrop-blur-0 md:backdrop-blur-0  w-full md:w-auto lg:w-auto"
           }
         >
           <p className="lg:underline md:underline">See a quick demo</p>

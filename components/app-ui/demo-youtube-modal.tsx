@@ -4,7 +4,7 @@ import HeroVideoDialog from "../magicui/hero-video-dialog";
 
 const DemoYoutubeModal = () => {
   return (
-    <div className="relativr">
+    <div className="relative w-full md:w-auto lg:w-auto">
       <HeroVideoDialog
         className="block dark:hidden"
         animationStyle="top-in-bottom-out"

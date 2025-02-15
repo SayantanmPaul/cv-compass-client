@@ -52,7 +52,7 @@ const grid = [
   {
     title: "Powered by LLM",
     description:
-      "Our application relies on Llama3 model by Meta to review and score the candidates strength.",
+      "Our application relies on multiple open-source models to review and score the candidates strength.",
     icon: <BrainIcon strokeWidth={1.5} className="w-5 h-5" />,
   },
   {
@@ -64,7 +64,7 @@ const grid = [
   {
     title: "Local Processing",
     description:
-      "As there's no user database, most of your data is stored and managed from your cached memory.",
+      "As there's no user specific database, most of your data is stored and managed from your cached memory.",
     icon: <CpuIcon strokeWidth={1.5} className="w-5 h-5" />,
   },
   {
