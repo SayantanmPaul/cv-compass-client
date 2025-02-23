@@ -26,7 +26,7 @@ const ImpactSection = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      id="challanges"
+      id="challenges"
       className="flex flex-col gap-10 lg:items-start md:items-center items-start justify-center w-full max-w-screen-2xl lg:px-3 relative"
     >
       <motion.div

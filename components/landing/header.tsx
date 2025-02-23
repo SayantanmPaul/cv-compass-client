@@ -13,8 +13,8 @@ const HeaderComp = () => {
         <ProductLogoWithName />
       </span>
       <div className="lg:flex md:flex items-center gap-6 font-semibold font-brand text-sm hidden text-slate-50/80 py-1">
-        <a href="#challanges" className={`${navOptionsClass}`}>
-          Challanges
+        <a href="#challenges" className={`${navOptionsClass}`}>
+          Challenges
         </a>
         <a href="#features" className={`${navOptionsClass}`}>
           Features
