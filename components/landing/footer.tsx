@@ -18,6 +18,16 @@ const Footer = () => {
             <CopyrightIcon strokeWidth={2} className="w-3.5 h-3.5 text-white" />
             2025 CVCompass | All rights reserved
           </p>
+          <span className=" text-white font-brand text-xs flex flex-1 gap-1 items-center font-medium pt-2">
+            Built and maintained by{" "}
+            <a
+              href="https://sayantanpaul.com/"
+              className="text-accent underline"
+              target="_blank"
+            >
+              @sayantanpaul
+            </a>
+          </span>
         </div>
         <FooterRoutes />
       </div>

@@ -25,6 +25,15 @@ export const axiosCLient = axios.create({
   withCredentials: true,
 });
 
+export const getModelNames = async () => {
+  try {
+    const res = await axiosCLient.get("/available-models");
+    return res.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const generateFeedback = async (data: FormInput) => {
   try {
     const res = await axiosCLient.post("/upload", data, {

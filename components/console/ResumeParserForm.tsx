@@ -1,6 +1,9 @@
 import { useAppStore } from "@/context/AppStore";
 import { toast } from "@/hooks/use-toast";
-import { useGenerateFeadback } from "@/lib/react-query/queries";
+import {
+  useGenerateFeadback,
+  useGetModelNames,
+} from "@/lib/react-query/queries";
 import { FormInput } from "@/lib/types";
 import { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
@@ -170,11 +173,8 @@ const ResumeParserForm: React.FC = () => {
   };
 
   // model type options: (dynamic fetch in future )
-  const modelOptions: FormInput["modelName"][] = [
-    "Llama-3.3-70b-versatile",
-    "DeepSeek-R1-Distill-Qwen-32B",
-    "DeepSeek-R1-Distill-Llama-8B (fine tuned)",
-  ];
+  const { data: modelOptions, isLoading: isModelOptionsLoading } =
+    useGetModelNames();
 
   return (
     <div className="w-full h-fit flex flex-col items-center lg:gap-5 gap-3 overflow-hidden">
@@ -248,17 +248,25 @@ const ResumeParserForm: React.FC = () => {
                 <SelectContent className="rounded-none bg-background peer-focus:border-slate-300/30 font-secondary">
                   <SelectGroup>
                     <SelectLabel>Avaiable models</SelectLabel>
-                    {modelOptions.map((model, index) => (
-                      <SelectItem
-                        key={index}
-                        value={model}
-                        disabled={
-                          model === "DeepSeek-R1-Distill-Llama-8B (fine tuned)"
-                        }
-                      >
-                        {model}
+                    {modelOptions &&
+                      modelOptions.data.length > 0 &&
+                      modelOptions.data.map((model: string, _: number) => (
+                        <SelectItem
+                          key={_}
+                          value={model}
+                          disabled={
+                            model ===
+                            "DeepSeek-R1-Distill-Llama-8B (fine tuned)"
+                          }
+                        >
+                          {model}
+                        </SelectItem>
+                      ))}
+                    {isModelOptionsLoading && (
+                      <SelectItem value="loading" disabled>
+                        Loading...
                       </SelectItem>
-                    ))}
+                    )}
                   </SelectGroup>
                 </SelectContent>
               </Select>

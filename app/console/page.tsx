@@ -6,6 +6,7 @@ import ResumeParserForm from "@/components/console/ResumeParserForm";
 import { TextShimmer } from "@/components/ui/text-shimmer";
 import { useAppStore } from "@/context/AppStore";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const ConsolePage = () => {
   const { listResults, isLoading } = useAppStore();
@@ -44,9 +45,27 @@ export default ConsolePage;
 // loading state
 const LoadingStateTextShimmer = () => {
   const { isLoading } = useAppStore();
+
+  const texts = [
+    "ai can make mistakes sometimes we should trust our own judgement...",
+    "generating the candidate's score...",
+    "results may take a while to generate...",
+  ];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isLoading) return;
+
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 5000); // Change every 2 seconds
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
+
   return (
-    <TextShimmer className={`font-mono text-sm `} duration={isLoading ? 1 : 0}>
-      generating the candidate&apos;s score...
+    <TextShimmer className="font-mono text-sm" duration={1}>
+      {texts[index]}
     </TextShimmer>
   );
 };
